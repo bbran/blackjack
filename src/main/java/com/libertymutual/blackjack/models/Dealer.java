@@ -11,8 +11,10 @@ public class Dealer {
 		return hand;
 	}
 	
-	public void play()	{
-		
+	public void play(Deck deck)	{
+		while (hand.getCurrentHandValue() < 17)	{
+			takeCard(deck.takeCard());
+		}
 	}
 	
 	public void takeCard(Card card)	{

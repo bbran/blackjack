@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Blackjack 8000</title>
+	</head>
+	<body>
+		<h1>Game Result</h1>
+		<h2>Dealer:</h2>
+			{{#dealerCards}}
+				{{.}}
+			{{/dealerCards}}
+			{{dealerHandValue}}
+
+		<h2>Player:</h2>
+			{{#playerCards}}
+				{{.}}
+			{{/playerCards}}
+			{{playerHandValue}}
+	</body>
+</html>

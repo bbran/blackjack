@@ -7,13 +7,18 @@
 		{{#dealerCards}}
 			{{.}}
 		{{/dealerCards}}
+		{{dealerHandValue}}
 		<br>
 		{{#playerCards}}
 			{{.}}
 		{{/playerCards}}
+		{{playerHandValue}}
 		<br>
 		<form method="post" action="/player-hit">
-		<button>Hit Me</button>
+			<button>Hit Me</button>
+		</form>
+		<form method="post" action="/player-stand">
+			<button>Stand</button>
 		</form>
 	</body>
 </html>

@@ -26,11 +26,23 @@ public class GameController {
 	
 	@PostMapping("new-game")
 	public ModelAndView startGame(int bet)	{
-		ModelAndView modelAndView = new ModelAndView("blackjack/play");
-		game = new Game(deck, bet, dealer, player);
-		game.initializeGame();
-		modelAndView.addObject("dealerCards", dealer.getHand().getCards());
-		modelAndView.addObject("playerCards", player.getHand().getCards());
+		ModelAndView modelAndView;
+		if (player.getBalance() - bet >= 0)	{
+			modelAndView = new ModelAndView("blackjack/play");
+			game = new Game(deck, bet, dealer, player);
+			game.initializeGame();
+			modelAndView.addObject("dealerCards", dealer.getHand().getCards());
+			modelAndView.addObject("dealerHandValue", dealer.getHand().getCurrentHandValue());
+			System.out.println(dealer.getHand().getCards().toString());
+			System.out.println(dealer.getHand().getCurrentHandValue());
+			modelAndView.addObject("playerCards", player.getHand().getCards());
+			modelAndView.addObject("playerHandValue", player.getHand().getCurrentHandValue());
+			System.out.println(player.getHand().getCurrentHandValue());
+			System.out.println(player.getHand().getCards().toString());
+		}
+		else {
+			modelAndView = new ModelAndView("blackjack/out-of-money");
+		}
 		return modelAndView;
 	}
 	
@@ -38,7 +50,9 @@ public class GameController {
 	public ModelAndView tableView()	{
 		ModelAndView modelAndView = new ModelAndView("blackjack/play");
 		modelAndView.addObject("dealerCards", dealer.getHand().getCards());
+		modelAndView.addObject("dealerHandValue", dealer.getHand().getCurrentHandValue());
 		modelAndView.addObject("playerCards", player.getHand().getCards());
+		modelAndView.addObject("playerHandValue", player.getHand().getCurrentHandValue());
 		return modelAndView;
 	}
 	
@@ -54,8 +68,15 @@ public class GameController {
 	}
 	
 	@PostMapping("player-stand")
-	public String finishGame()	{
-		dealer.play();
+	public ModelAndView finishAndShowResult()	{
+		ModelAndView modelAndView = new ModelAndView("blackjack/result");
+		dealer.play(deck);
+		modelAndView.addObject("dealerCards", dealer.getHand().getCards());
+		modelAndView.addObject("dealerHandValue", dealer.getHand().getCurrentHandValue());
+		modelAndView.addObject("playerCards", player.getHand().getCards());
+		modelAndView.addObject("playerHandValue", player.getHand().getCurrentHandValue());
+//		modelAndView.addObject(", attributeValue)
+		return modelAndView;
 	}
 
 }

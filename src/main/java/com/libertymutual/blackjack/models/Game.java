@@ -23,10 +23,6 @@ public class Game {
 		return deck;
 	}
 	
-	public void stand()	{
-		dealer.play();
-	}
-	
 	public void payout()	{
 		
 	}
