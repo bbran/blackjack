@@ -14,7 +14,7 @@ public class BlackjackApplication {
 		SpringApplication.run(BlackjackApplication.class, args);
 		
 		GameController gc = new GameController();
-		gc.startGame(50);
+		gc.newGame(50);
 		
 	}
 }

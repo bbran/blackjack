@@ -2,11 +2,7 @@ package com.libertymutual.blackjack.models;
 
 public class Player {
 	private Hand hand;
-	private int balance;
-	
-	public Player() {
-		this.balance = 1000;
-	}
+	private Wallet wallet = new Wallet();
 	
 	public void setInitialHand(Deck deck)	{
 		hand = new Hand(deck);
@@ -15,17 +11,12 @@ public class Player {
 	public Hand getHand()	{
 		return hand;
 	}
-
-	public int getBalance() {
-		return balance;
-	}
-	
-	public void adjustBalance(int amount)	{
-		balance += amount;
-	}
 	
 	public void takeCard(Card card)	{
 		hand.takeCard(card);
 	}
 
+	public Wallet getWallet() {
+		return wallet;
+	}
 }

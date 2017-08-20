@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Blackjack 8000</title>
+		<link rel="stylesheet" href="css/styles.css">
+	</head>
+	<body>
+		<div class="table">
+			<div class="initial-bet">
+				<h1>Start playing Blackjack by placing a bet below:</h1>
+				{{> blackjack/bet}}
+			</div>
+			<div class="initial-walletBalance">
+				Balance: {{player.wallet.balance}}
+			</div>
+		</div>
+	</body>
+</html>

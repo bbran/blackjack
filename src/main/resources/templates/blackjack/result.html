@@ -2,19 +2,45 @@
 <html>
 	<head>
 		<title>Blackjack 8000</title>
+		<link rel="stylesheet" href="css/styles.css">
 	</head>
 	<body>
-		<h1>Game Result</h1>
-		<h2>Dealer:</h2>
-			{{#dealerCards}}
-				{{.}}
-			{{/dealerCards}}
-			{{dealerHandValue}}
-
-		<h2>Player:</h2>
-			{{#playerCards}}
-				{{.}}
-			{{/playerCards}}
-			{{playerHandValue}}
+		<div class="table">
+			<h2>Dealer's Hand</h2>
+			<div class="hand">
+				{{#dealer.hand.cards}}
+					<div class="card {{suit}}">
+						{{name}}
+						{{suit}}
+					</div>
+				{{/dealer.hand.cards}}
+			</div>
+			<h2>Your Hand</h2>
+			<div class="hand">
+				{{#player.hand.cards}}
+					<div class="card {{suit}}">
+						{{name}}
+						{{suit}}
+					</div>
+				{{/player.hand.cards}}
+			</div>
+			<div class="player-actions">
+				<div class="result">
+					<h2>Game Results:</h2>
+					Result: {{game.gameResult}}
+					<br>
+					Bet: {{game.currentBet}}
+					<br>
+					Payout: {{game.payout}}
+				</div>
+				<div>
+					Place a bet to play again:
+					{{> blackjack/bet}}
+				</div>
+			</div>
+			<div class="play-walletBalance">
+				Balance: {{player.wallet.balance}}
+			</div>
+		</div>
 	</body>
 </html>

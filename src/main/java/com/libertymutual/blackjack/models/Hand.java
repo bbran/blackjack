@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class Hand {
 	private ArrayList<Card> cards = new ArrayList<Card>();
 	private Deck deck;
-	private ArrayList<Integer> currentHandTotals = new ArrayList<Integer>();
 	
 	public Hand(Deck deck) {
 		this.deck = deck;
@@ -16,14 +15,14 @@ public class Hand {
 	
 	public void takeCard(Card card)	{
 		cards.add(card);
-		calculateHandTotals();
 	}
 	
 	public ArrayList<Card> getCards() {
 		return cards;
 	}
 
-	private void calculateHandTotals()	{
+	private ArrayList<Integer> calculateHandTotals()	{
+		ArrayList<Integer> currentHandTotals = new ArrayList<Integer>();
 		int handMin = 0;
 		int handAces = 0;
 		int handMax = 0;
@@ -45,11 +44,12 @@ public class Hand {
 			handAces = handMin + 10;
 			currentHandTotals.add(handAces);
 		}
+		return currentHandTotals;
 	}
 	
 	public int getCurrentHandValue()	{
 		int bestNonBustResult = 0;
-		for (int value : currentHandTotals)	{
+		for (int value : calculateHandTotals())	{
 			if(value > bestNonBustResult && value < 22)	{
 				bestNonBustResult = value;
 			}

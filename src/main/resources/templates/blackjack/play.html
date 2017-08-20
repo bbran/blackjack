@@ -2,23 +2,39 @@
 <html>
 	<head>
 		<title>Blackjack 8000</title>
+		<link rel="stylesheet" href="css/styles.css">
 	</head>
 	<body>
-		{{#dealerCards}}
-			{{.}}
-		{{/dealerCards}}
-		{{dealerHandValue}}
-		<br>
-		{{#playerCards}}
-			{{.}}
-		{{/playerCards}}
-		{{playerHandValue}}
-		<br>
-		<form method="post" action="/player-hit">
-			<button>Hit Me</button>
-		</form>
-		<form method="post" action="/player-stand">
-			<button>Stand</button>
-		</form>
+		<div class="table">
+			<h2>Dealer's Hand</h2>
+			<div class="hand">
+				<div class="card {{dealerShowCardSuit}}">
+					{{dealerShowCardName}}
+					{{dealerShowCardSuit}}
+				</div>
+				<div class="hole-card">???</div>
+			</div>
+			<h2>Your Hand</h2>
+			<div class="hand">
+				{{#player.hand.cards}}
+					<div class="card {{suit}}">
+						{{name}}
+						{{suit}}
+					</div>
+				{{/player.hand.cards}}
+			</div>
+			<div class="player-actions">
+				{{player.hand.currentHandValue}}
+				<form method="post" action="/player-hit">
+					<button>Hit Me</button>
+				</form>
+				<form method="post" action="/player-stand">
+					<button>Stand</button>
+				</form>
+			</div>
+			<div class="play-walletBalance">
+				Balance: {{player.wallet.balance}}
+			</div>
+		</div>
 	</body>
 </html>
