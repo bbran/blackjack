@@ -3,15 +3,18 @@
 	<head>
 		<title>Blackjack 8000</title>
 		<link rel="stylesheet" href="css/styles.css">
+		<link href="https://fonts.googleapis.com/css?family=Cinzel|Rubik" rel="stylesheet"> 
 	</head>
 	<body>
 		<div class="table">
 			<div class="initial-bet">
-				<h1>Start playing Blackjack by placing a bet below:</h1>
+				<h1>Blackjack</h1>
+				<br><br>
+				<h3>Place your bet below:</h3>
 				{{> blackjack/bet}}
 			</div>
 			<div class="initial-walletBalance">
-				Balance: {{player.wallet.balance}}
+				<h3>Balance: {{player.wallet.balance}}</h3>
 			</div>
 		</div>
 	</body>

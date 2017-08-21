@@ -3,10 +3,13 @@
 	<head>
 		<title>Blackjack 8000</title>
 		<link rel="stylesheet" href="css/styles.css">
+		<link href="https://fonts.googleapis.com/css?family=Cinzel|Rubik" rel="stylesheet"> 
 	</head>
 	<body>
 		<div class="table">
-			<h2>Dealer's Hand</h2>
+			<div class="hand-title">
+				<h2>Dealer's Hand</h2>
+			</div>
 			<div class="hand">
 				<div class="card {{dealerShowCardSuit}}">
 					{{dealerShowCardName}}
@@ -14,7 +17,10 @@
 				</div>
 				<div class="hole-card">???</div>
 			</div>
-			<h2>Your Hand</h2>
+			<div class="hand-title">
+				<h2>Your Hand</h2>
+				<p>Hand Value: {{player.hand.currentHandValue}}</p>
+			</div>
 			<div class="hand">
 				{{#player.hand.cards}}
 					<div class="card {{suit}}">
@@ -24,16 +30,19 @@
 				{{/player.hand.cards}}
 			</div>
 			<div class="player-actions">
-				{{player.hand.currentHandValue}}
+				<div class="spacer"></div>
 				<form method="post" action="/player-hit">
 					<button>Hit Me</button>
 				</form>
 				<form method="post" action="/player-stand">
 					<button>Stand</button>
 				</form>
+				<form method="post" action="/double-down">
+					<button>Double Down</button>
+				</form>
 			</div>
 			<div class="play-walletBalance">
-				Balance: {{player.wallet.balance}}
+				<h3>Balance: {{player.wallet.balance}}</h3>
 			</div>
 		</div>
 	</body>

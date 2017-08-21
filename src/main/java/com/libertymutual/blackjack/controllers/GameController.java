@@ -1,7 +1,5 @@
 package com.libertymutual.blackjack.controllers;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,7 +29,6 @@ public class GameController {
 	@PostMapping("new-game")
 	public ModelAndView newGame(int bet)	{
 		ModelAndView modelAndView;
-		//player must have enough money to bet and deck must have at least 4 cards to start new game
 		if (player.getWallet().getBalance() <= 0)	{
 			modelAndView = new ModelAndView("blackjack/error");
 			modelAndView.addObject("errorMessage", "You're out of money.");
@@ -104,9 +101,39 @@ public class GameController {
 	public ModelAndView resultView()	{
 		ModelAndView modelAndView = new ModelAndView("blackjack/result");
 		modelAndView.addObject("dealer", dealer);
+		if (dealer.getHand().getCurrentHandValue() > 21)	{
+			modelAndView.addObject("dealerHandValue", "Bust");
+		}
+		else	{
+			modelAndView.addObject("dealerHandValue", dealer.getHand().getCurrentHandValue());
+		}
 		modelAndView.addObject("player", player);
+		if (player.getHand().getCurrentHandValue() > 21)	{
+			modelAndView.addObject("playerHandValue", "Bust");
+		}
+		else	{
+			modelAndView.addObject("playerHandValue", player.getHand().getCurrentHandValue());
+		}
 		modelAndView.addObject("game", game);
 		return modelAndView;
+	}
+	
+	@PostMapping("double-down")
+	public ModelAndView doubleDown()	{
+		ModelAndView modelAndView;
+		if (deck.deckHasCards()) {
+			modelAndView = new ModelAndView("redirect:/result");
+			game.doubleDown();
+			player.takeCard(deck.takeCard());
+			dealer.play(deck);
+			game.finishGame();
+			return modelAndView;
+		}
+		else	{
+			modelAndView = new ModelAndView("blackjack/error");
+			modelAndView.addObject("errorMessage", "The deck is out of cards.");
+			return modelAndView;
+		}
 	}
 
 }

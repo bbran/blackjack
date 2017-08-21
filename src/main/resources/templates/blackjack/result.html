@@ -3,10 +3,14 @@
 	<head>
 		<title>Blackjack 8000</title>
 		<link rel="stylesheet" href="css/styles.css">
+		<link href="https://fonts.googleapis.com/css?family=Cinzel|Rubik" rel="stylesheet"> 
 	</head>
 	<body>
 		<div class="table">
-			<h2>Dealer's Hand</h2>
+			<div class="hand-title">
+				<h2>Dealer's Hand</h2>
+				<p>Hand Value: {{dealerHandValue}}</p>
+			</div>
 			<div class="hand">
 				{{#dealer.hand.cards}}
 					<div class="card {{suit}}">
@@ -15,7 +19,10 @@
 					</div>
 				{{/dealer.hand.cards}}
 			</div>
-			<h2>Your Hand</h2>
+			<div class="hand-title">
+				<h2>Your Hand</h2>
+				<p>Hand Value: {{playerHandValue}}</p>
+			</div>
 			<div class="hand">
 				{{#player.hand.cards}}
 					<div class="card {{suit}}">
@@ -27,11 +34,11 @@
 			<div class="player-actions">
 				<div class="result">
 					<h2>Game Results:</h2>
-					Result: {{game.gameResult}}
-					<br>
-					Bet: {{game.currentBet}}
-					<br>
-					Payout: {{game.payout}}
+					<div class="result-detail">
+						<p>Result: {{game.gameResult}}</p>
+						<p>Total Bet: {{game.currentBet}}</p>
+						<p>Payout: {{game.payout}}</p>
+					</div>
 				</div>
 				<div>
 					Place a bet to play again:
@@ -39,7 +46,7 @@
 				</div>
 			</div>
 			<div class="play-walletBalance">
-				Balance: {{player.wallet.balance}}
+				<h3>Balance: {{player.wallet.balance}}</h3>
 			</div>
 		</div>
 	</body>

@@ -4,9 +4,9 @@ public class Game {
 	private int currentBet;
 	private Dealer dealer;
 	private Player player;
-	private Boolean isDoubleDown;
 	private String gameResult;
 	private int payout;
+	
 	
 	public Game(Deck deck, int bet, Dealer dealer, Player player) {
 		this.dealer = dealer;
@@ -53,14 +53,11 @@ public class Game {
 		}
 	}
 	
+	
+	
 	public void finishGame()	{
 		setResult();
 		setPayout();
-	}
-	
-	public void doubleDown()	{
-		currentBet = currentBet*2;
-		isDoubleDown = true;
 	}
 	
 	public String getGameResult() {
@@ -75,6 +72,8 @@ public class Game {
 		return currentBet;
 	}
 	
-	
-	
+	public void doubleDown()	{
+		player.getWallet().adjustBalance(-1 * currentBet);
+		currentBet = currentBet*2;
+	}
 }
